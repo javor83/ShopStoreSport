@@ -17,16 +17,16 @@ namespace ShopStoreSport.Controllers
             this.rp = x;
         }
         //************************************************************************
-        public IActionResult Index(int current_page = 1)
+        public IActionResult Index(int productPage = 1)
         {
             int total_elements = this.rp.CountProducts();
-            var filtered = this.rp.GetProductsDTO(current_page, consts.ProductPageSize);
+            var filtered = this.rp.GetProductsDTO(productPage, consts.ProductPageSize);
             ProductsListViewModel list = new ProductsListViewModel()
             {
                 Products = filtered,
                 PagingInfo = new PageSizeDTO()
                 {
-                    CurrentPage = current_page,
+                    CurrentPage = productPage,
                     ItemsPerPage = consts.ProductPageSize,
                     TotalItems = total_elements
                     
@@ -42,12 +42,7 @@ namespace ShopStoreSport.Controllers
         {
             return View();
         }
-        //************************************************************************
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        
         //************************************************************************
     }
 }

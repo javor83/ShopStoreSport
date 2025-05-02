@@ -4,45 +4,14 @@
 
 @model ProductsListViewModel
 <h2 class="d-block text-center">@ProductDTO_caption.CaptionTable</h2>
-@if (Model.Products.Empty())
+
+<products-list products="@Model.Products"></products-list>
+
+
+@if (Model.Products.Empty() == false)
 {
-    <h4>@ProductDTO_caption.Empty</h4>
+    <page-link paging-info="@Model.PagingInfo"></page-link>
    
-}else
-{
-    
-    <h4>@ProductDTO_caption.Count @Model.PagingInfo.TotalItems</h4>
-
-    <table class="table table-hover table-striped">
-        <tr>
-            <th class="text-center">@ProductDTO_caption.ID</th>
-            <th class="text-center">@ProductDTO_caption.Name</th>
-            <th class="text-center">@ProductDTO_caption.Category</th>
-            <th class="text-center">@ProductDTO_caption.Price</th>
-            <th class="text-center">@ProductDTO_caption.Descr</th>
-           
-        </tr>
-        @foreach (ProductDTO item in Model.Products)
-        {
-            <tr>
-
-                <td class="text-center">@item.ID</td>
-                <td>@item.Name</td>
-                <td class="text-center">@item.Category</td>
-                <td class="text-center">@item.Price.ToMoney()</td>
-                <td>
-                    <div class="text-center">
-                        @item.Description
-                    </div>
-                    <div class="mt-1">
-                        <img src="@item.Preview.HTMLImgProduct()" class="rounded mx-auto d-block" style="width:100px;" alt="image..." />
-                    </div>
-                    </td>
-                
-            </tr>   
-        }
-    </table>
-    
 }
 <div class="mt-2">
     <a asp-controller="Home" asp-action="Add" class="btn btn-outline-info">@ProductDTO_caption.Add</a>
