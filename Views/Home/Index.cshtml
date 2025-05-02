@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model ProductsListViewModel
+<h2 class="d-block text-center">@ProductDTO_caption.CaptionTable</h2>
+@if (Model.Products.Empty())
+{
+    <h4>@ProductDTO_caption.Empty</h4>
+   
+}else
+{
+    <h4>@ProductDTO_caption.Count @Model.Products.Count()</h4>
+
+    <table class="table table-hover table-striped">
+        <tr>
+            <th>@ProductDTO_caption.ID</th>
+            <th>@ProductDTO_caption.Name</th>
+            <th>@ProductDTO_caption.Category</th>
+            <th>@ProductDTO_caption.Price</th>
+            <th>@ProductDTO_caption.Descr</th>
+        </tr>
+        @foreach (ProductDTO item in Model.Products)
+        {
+            <tr>
+                <td>@item.ID</td>
+                <td>@item.Name</td>
+                <td>@item.Category</td>
+                <td>@item.Price.ToMoney()</td>
+                <td>@item.Description</td>
+            </tr>   
+        }
+    </table>
+    
+}
+<div class="mt-2">
+    <a asp-controller="Home" asp-action="Add" class="btn btn-outline-info">@ProductDTO_caption.Add</a>
+</div>
