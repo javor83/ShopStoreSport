@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using ShopStoreSport.database;
 using ShopStoreSport.DTO;
 using ShopStoreSport.Models;
 using System.Diagnostics;
@@ -17,10 +18,10 @@ namespace ShopStoreSport.Controllers
             this.rp = x;
         }
         //************************************************************************
-        public IActionResult Index(int pindex = 1)
+        public IActionResult Index(int? category,int pindex = 1)
         {
-            int total_elements = this.rp.CountProducts();
-            var filtered = this.rp.GetProductsDTO(pindex, consts.ProductPageSize);
+            int total_elements = this.rp.CountProducts(category);
+            var filtered = this.rp.GetProductsDTO(pindex, category, consts.ProductPageSize);
             ProductsListViewModel list = new ProductsListViewModel()
             {
                 Products = filtered,
@@ -30,7 +31,9 @@ namespace ShopStoreSport.Controllers
                     ItemsPerPage = consts.ProductPageSize,
                     TotalItems = total_elements
                     
-                }
+                },
+                Categories = this.rp.GetCategories(),
+                Category = category
             };
     
             

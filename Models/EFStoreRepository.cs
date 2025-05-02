@@ -13,15 +13,31 @@ namespace ShopStoreSport.Models
             this.context = context;
         }
         //******************************************************************************
-        int IStoreRepository.CountProducts()
+        private bool valid_product(Product p, int? ct)
         {
-            int result = this.context.Products.Count();
+            return ct.HasValue == false || p.Category == ct;
+        }
+        //******************************************************************************
+        IEnumerable<Category> IStoreRepository.GetCategories()
+        {
+            var result = this.context.Categories;
             return result;
         }
         //******************************************************************************
-        IEnumerable<ProductDTO> IStoreRepository.GetProductsDTO(int current_page,int take_count)
+        int IStoreRepository.CountProducts(int? category)
         {
-            IEnumerable<Product> filtered = this.context.Products.Skip(take_count*(current_page - 1)).Take(take_count).ToList();
+            
+            
+            int result = this.context.Products.AsEnumerable<Product>().
+                Where(p => valid_product(p,category)).Count();
+            return result;
+        }
+        //******************************************************************************
+        IEnumerable<ProductDTO> IStoreRepository.GetProductsDTO(int current_page, int? category ,int take_count)
+        {
+            IEnumerable<Product> filtered = this.context.Products.AsEnumerable().
+                Where(p=> valid_product(p, category))
+                .Skip(take_count*(current_page - 1)).Take(take_count).ToList();
             var query = from x in filtered
                         join y in this.context.Categories
                         on x.Category equals y.Id

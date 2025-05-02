@@ -28,6 +28,7 @@ namespace ShopStoreSport.DTO
         //************************************************************
         public PageSizeDTO PagingInfo { get; set; }
 
+        public int? Category { get; set; }
         //************************************************************
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
@@ -65,7 +66,8 @@ namespace ShopStoreSport.DTO
                                 Controller = this.PageController,
                                 Values = new
                                 {
-                                    pindex = i
+                                    pindex = i,
+                                    category = this.Category
                                 }
                             }
                         );

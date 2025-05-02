@@ -46,7 +46,7 @@ namespace ShopStoreSport
 
             app.MapControllerRoute(
                 "pagination",
-                "Products/Page{pindex}",
+                "Products/Page{pindex}/Category{category}",
                 new { Controller = "Home", action = "Index" });
 
             app.MapControllerRoute(
