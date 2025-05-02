@@ -1,4 +1,5 @@
-﻿using ShopStoreSport.database;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using ShopStoreSport.database;
 using ShopStoreSport.DTO;
 
 namespace ShopStoreSport.Models
@@ -12,9 +13,16 @@ namespace ShopStoreSport.Models
             this.context = context;
         }
         //******************************************************************************
-        public IEnumerable<ProductDTO> GetProductsDTO()
+        int IStoreRepository.CountProducts()
         {
-            var query = from x in this.context.Products
+            int result = this.context.Products.Count();
+            return result;
+        }
+        //******************************************************************************
+        IEnumerable<ProductDTO> IStoreRepository.GetProductsDTO(int current_page,int take_count)
+        {
+            IEnumerable<Product> filtered = this.context.Products.Skip(take_count*(current_page - 1)).Take(take_count).ToList();
+            var query = from x in filtered
                         join y in this.context.Categories
                         on x.Category equals y.Id
                         select new ProductDTO()
@@ -29,7 +37,7 @@ namespace ShopStoreSport.Models
             return query;
         }
         //******************************************************************************
-        public IEnumerable<Product> GetProducts()
+        IEnumerable<Product> IStoreRepository.GetProducts()
         {
             return this.context.Products;
         }

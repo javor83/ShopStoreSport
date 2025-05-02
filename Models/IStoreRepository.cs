@@ -7,7 +7,11 @@ namespace ShopStoreSport.Models
     {
        IEnumerable<Product> GetProducts();
 
-       IEnumerable<ProductDTO> GetProductsDTO();
+       IEnumerable<ProductDTO> GetProductsDTO(int current_page, int take_count);
+
+        int CountProducts();
+
+
 
 
     }
