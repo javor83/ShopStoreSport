@@ -47,6 +47,9 @@ public partial class SportsstoreContext : DbContext
             entity.ToTable("PRODUCTS");
 
             entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Preview)
+                .HasMaxLength(100)
+                .HasColumnName("PREVIEW");
             entity.Property(e => e.Price)
                 .HasColumnType("decimal(8, 2)")
                 .HasColumnName("PRICE");

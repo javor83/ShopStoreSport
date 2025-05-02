@@ -6,11 +6,12 @@ namespace ShopStoreSport.Models
     public class EFStoreRepository:IStoreRepository
     {
         private SportsstoreContext context = null;
+        //******************************************************************************
         public EFStoreRepository(SportsstoreContext context)
         {
             this.context = context;
         }
-
+        //******************************************************************************
         public IEnumerable<ProductDTO> GetProductsDTO()
         {
             var query = from x in this.context.Products
@@ -22,15 +23,17 @@ namespace ShopStoreSport.Models
                             Description = x.Description,
                             Price = x.Price,
                             Category = y.Cname,
-                            Name = x.Name
+                            Name = x.Name,
+                            Preview = x.Preview
                         };
             return query;
         }
-
+        //******************************************************************************
         public IEnumerable<Product> GetProducts()
         {
             return this.context.Products;
         }
+        //******************************************************************************
 
     }
 }

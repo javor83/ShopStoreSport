@@ -15,5 +15,7 @@ public partial class Product
 
     public int? Category { get; set; }
 
+    public string? Preview { get; set; }
+
     public virtual Category? CategoryNavigation { get; set; }
 }

@@ -13,5 +13,6 @@
         public const string Add = "Добави";
         public const string CaptionTable = "Списък продукти";
         public const string Count = "Продукти : ";
+        public const string ImagePreview = "Снимка";
     }
 }
