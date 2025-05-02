@@ -11,6 +11,9 @@ namespace ShopStoreSport.DTO
    
     public class PageLinkTagHelper : TagHelper
     {
+        public string PageController { get; set; }
+        //************************************************************
+        public string PageAction { get; set; }
         //************************************************************
         [ViewContext]
         [HtmlAttributeNotBound]
@@ -58,11 +61,11 @@ namespace ShopStoreSport.DTO
                         (
                             new UrlActionContext()
                             {
-                                Action = "Index",
-                                Controller = "Home",
+                                Action = this.PageAction,
+                                Controller = this.PageController,
                                 Values = new
                                 {
-                                    productPage = i
+                                    pindex = i
                                 }
                             }
                         );

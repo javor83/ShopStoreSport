@@ -17,16 +17,16 @@ namespace ShopStoreSport.Controllers
             this.rp = x;
         }
         //************************************************************************
-        public IActionResult Index(int productPage = 1)
+        public IActionResult Index(int pindex = 1)
         {
             int total_elements = this.rp.CountProducts();
-            var filtered = this.rp.GetProductsDTO(productPage, consts.ProductPageSize);
+            var filtered = this.rp.GetProductsDTO(pindex, consts.ProductPageSize);
             ProductsListViewModel list = new ProductsListViewModel()
             {
                 Products = filtered,
                 PagingInfo = new PageSizeDTO()
                 {
-                    CurrentPage = productPage,
+                    CurrentPage = pindex,
                     ItemsPerPage = consts.ProductPageSize,
                     TotalItems = total_elements
                     

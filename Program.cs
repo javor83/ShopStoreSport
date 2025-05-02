@@ -45,6 +45,11 @@ namespace ShopStoreSport
             app.UseAuthorization();
 
             app.MapControllerRoute(
+                "pagination",
+                "Products/Page{pindex}",
+                new { Controller = "Home", action = "Index" });
+
+            app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 

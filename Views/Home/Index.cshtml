@@ -5,14 +5,15 @@
 @model ProductsListViewModel
 <h2 class="d-block text-center">@ProductDTO_caption.CaptionTable</h2>
 
-<products-list products="@Model.Products"></products-list>
+<products-list products="@Model.Products" total-count="@Model.PagingInfo.TotalItems"></products-list>
 
 
 @if (Model.Products.Empty() == false)
 {
-    <page-link paging-info="@Model.PagingInfo"></page-link>
+    <page-link paging-info="@Model.PagingInfo" page-action="Index" page-controller="Home"></page-link>
    
 }
 <div class="mt-2">
-    <a asp-controller="Home" asp-action="Add" class="btn btn-outline-info">@ProductDTO_caption.Add</a>
+    <a asp-controller="Home" asp-action="Add" class="btn btn-outline-primary">@ProductDTO_caption.Add</a>
 </div>
+<partial name="DateTimePView" model="@DateTime.Now" />
