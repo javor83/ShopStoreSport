@@ -1,5 +1,4 @@
 ﻿using ShopStoreSport.database;
-using ShopStoreSport.DTO;
 
 namespace ShopStoreSport.Models
 {

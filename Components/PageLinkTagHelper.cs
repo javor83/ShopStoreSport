@@ -4,11 +4,12 @@ using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.Runtime.TagHelpers;
 using Microsoft.AspNetCore.Razor.TagHelpers;
+using ShopStoreSport.Models;
 
-namespace ShopStoreSport.DTO
+namespace ShopStoreSport.Components
 {
 
-   
+
     public class PageLinkTagHelper : TagHelper
     {
         public string PageController { get; set; }
@@ -23,7 +24,7 @@ namespace ShopStoreSport.DTO
         //************************************************************
         public PageLinkTagHelper(IUrlHelperFactory url)
         {
-            this.fc = url;
+            fc = url;
         }
         //************************************************************
         public PageSizeDTO PagingInfo { get; set; }
@@ -35,17 +36,17 @@ namespace ShopStoreSport.DTO
         {
             output.TagName = "div";
             output.TagMode = TagMode.StartTagAndEndTag;
-            if (this.ViewContext != null && this.PagingInfo != null)
+            if (ViewContext != null && PagingInfo != null)
             {
                 TagBuilder tag_ul = new TagBuilder("ul");
-               
-              
+
+
                 tag_ul.AddCssClass("pagination");
 
-                for (int i = 1; i <= this.PagingInfo.TotalPages(); i++)
+                for (int i = 1; i <= PagingInfo.TotalPages(); i++)
                 {
                     TagBuilder tag_li = new TagBuilder("li");
-                    if (i == this.PagingInfo.CurrentPage)
+                    if (i == PagingInfo.CurrentPage)
                     {
                         tag_li.AddCssClass("page-item active");
                     }
@@ -53,21 +54,21 @@ namespace ShopStoreSport.DTO
                     {
                         tag_li.AddCssClass("page-item");
                     }
-                    
+
                     //-----------------------
                     TagBuilder tag_a = new TagBuilder("a");
                     tag_a.AddCssClass("page-link");
                     tag_a.Attributes["href"] =
-                        this.fc.GetUrlHelper(this.ViewContext).Action
+                        fc.GetUrlHelper(ViewContext).Action
                         (
                             new UrlActionContext()
                             {
-                                Action = this.PageAction,
-                                Controller = this.PageController,
+                                Action = PageAction,
+                                Controller = PageController,
                                 Values = new
                                 {
                                     pindex = i,
-                                    category = this.Category
+                                    category = Category
                                 }
                             }
                         );

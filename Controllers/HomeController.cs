@@ -41,11 +41,21 @@ namespace ShopStoreSport.Controllers
             return View(list);
         }
         //************************************************************************
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        [HttpPost,ValidateAntiForgeryToken]
         
+        public IActionResult Add(InsertProductDTO key)
+        {
+
+            return null;
+        }
+        //************************************************************************
+        public IActionResult Add()
+        {
+            InsertProductDTO item = InsertProductDTO.Empty();
+            item.CategoryList = this.rp.GetCategories();
+            return View(item);
+        }
+
         //************************************************************************
     }
 }

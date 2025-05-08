@@ -1,6 +1,6 @@
 ﻿using Microsoft.Data.SqlClient.DataClassification;
 
-namespace ShopStoreSport.DTO
+namespace ShopStoreSport.Models
 {
     public class ProductDTO
     {
@@ -15,6 +15,6 @@ namespace ShopStoreSport.DTO
         public decimal Price { get; set; }
 
         public string? Preview { get; set; }
-       
+
     }
 }

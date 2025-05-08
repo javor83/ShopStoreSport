@@ -1,6 +1,6 @@
 ﻿using ShopStoreSport.database;
 
-namespace ShopStoreSport.DTO
+namespace ShopStoreSport.Models
 {
     public class ProductsListViewModel
     {

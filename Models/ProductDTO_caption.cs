@@ -1,4 +1,4 @@
-﻿namespace ShopStoreSport.DTO
+﻿namespace ShopStoreSport.Models
 {
     public class ProductDTO_caption
     {

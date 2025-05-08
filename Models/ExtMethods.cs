@@ -1,4 +1,4 @@
-﻿namespace ShopStoreSport.DTO
+﻿namespace ShopStoreSport.Models
 {
     public static class ExtMethods
     {

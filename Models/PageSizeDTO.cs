@@ -1,4 +1,4 @@
-﻿namespace ShopStoreSport.DTO
+﻿namespace ShopStoreSport.Models
 {
     public class PageSizeDTO
     {
@@ -10,7 +10,7 @@
 
         public int TotalPages()
         {
-            int result = (int)Math.Ceiling(TotalItems / (float)this.ItemsPerPage);
+            int result = (int)Math.Ceiling(TotalItems / (float)ItemsPerPage);
             return result;
         }
     }
