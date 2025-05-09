@@ -12,9 +12,10 @@ namespace ShopStoreSport.Components
             rp = sp;
         }
 
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(int? category)
         {
             IEnumerable<Category> list = rp.GetCategories();
+            ViewBag.category = category;
             return View(list);
         }
 

@@ -1,10 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using ShopStoreSport.database;
-using ShopStoreSport.DTO;
 using ShopStoreSport.Models;
-using System.Diagnostics;
-using System.IO;
 
 
 namespace ShopStoreSport.Controllers

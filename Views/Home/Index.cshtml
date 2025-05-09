@@ -4,20 +4,27 @@
 
 @model ProductsListViewModel
 <h2 class="d-block text-center">@ProductDTO_caption.CaptionTable</h2>
+<div class="row">
+    <div class="col-xl-3 col-lg-4 col-sm-12 col-md-6">
+        <vc:nav category="@Model.Category"></vc:nav>
+    </div>
+    <div class="col-xl-9 col-lg-8 col-sm-12 col-md-6">
+        <products-list products="@Model.Products"
+                       buy="@ProductDTO_caption.Buy"
+                       total-count="@Model.PagingInfo.TotalItems"></products-list>
 
-<products-list products="@Model.Products" 
 
-total-count="@Model.PagingInfo.TotalItems"></products-list>
+        @if (Model.Products.Empty() == false)
+        {
+            <page-link paging-info="@Model.PagingInfo"
+                       category="@Model.Category"
+                       page-action="Index" page-controller="Home"></page-link>
 
-
-@if (Model.Products.Empty() == false)
-{
-    <page-link paging-info="@Model.PagingInfo"
-               category="@Model.Category"
-    page-action="Index" page-controller="Home"></page-link>
-   
-}
-<div class="mt-2">
-    <a asp-controller="Home" asp-action="Add" class="btn btn-outline-primary">@ProductDTO_caption.Add</a>
+        }
+        <div class="mt-2">
+            <a asp-controller="Home" asp-action="Add" class="btn btn-outline-primary">@ProductDTO_caption.Add</a>
+        </div>
+    </div>
 </div>
+
 <partial name="DateTimePView" model="@DateTime.Now" />

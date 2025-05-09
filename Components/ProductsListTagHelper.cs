@@ -26,6 +26,9 @@ namespace ShopStoreSport.DTO
         //******************************************************************
         public int TotalCount { get; set; }
         public IEnumerable<ProductDTO> Products { get; set; }
+
+        public string? Buy { get; set; }
+
         //******************************************************************
 
         private void InsertHeader(string caption,TagBuilder parent)
@@ -60,7 +63,46 @@ namespace ShopStoreSport.DTO
           
         }
         //******************************************************************
-        private void InsertProduct(string caption, TagBuilder parent,string class_name="text-center")
+        private void InsertAddToCart(int product_id, TagBuilder parent)
+        {
+           
+
+            TagBuilder tag_form = new TagBuilder("form");
+            
+            tag_form.Attributes.Add("method", "post");
+            tag_form.Attributes.Add
+                (
+                    "action",
+                    this.fc.GetUrlHelper(this.ViewContext).Action
+                    (
+                        new UrlActionContext()
+                        {
+                            Controller = "ShopCart",
+                            Action = "Buy",
+                            Values = new
+                            {
+                                pid = product_id
+
+                            }
+
+                        }
+                    )
+                );
+            //-----------------------------------
+            TagBuilder tag_submit = new TagBuilder("input");
+            tag_submit.Attributes.Add("type","submit");
+            tag_submit.Attributes.Add("value", this.Buy);
+
+            tag_submit.Attributes.Add("class", "btn btn-primary");
+            tag_form.InnerHtml.AppendHtml(tag_submit);
+            //-----------------------------------
+            parent.InnerHtml.AppendHtml(tag_form);
+
+
+
+        }
+        //******************************************************************
+        private TagBuilder InsertProduct(string caption, TagBuilder parent,string class_name="text-center")
         {
             TagBuilder tag_th = new TagBuilder("td");
             if (class_name != "")
@@ -69,9 +111,12 @@ namespace ShopStoreSport.DTO
             }
 
             tag_th.InnerHtml.Append(caption);
-
-
+            //---------------------------
+           
+            //---------------------------
             parent.InnerHtml.AppendHtml(tag_th);
+
+            return tag_th;
         }
         //******************************************************************
         public override void Process(TagHelperContext context, TagHelperOutput output)
@@ -120,11 +165,14 @@ namespace ShopStoreSport.DTO
                 {
                     TagBuilder tag_row = new TagBuilder("tr");
 
-                    InsertProduct(Convert.ToString(item.ID), tag_row);
-                    InsertProduct(Convert.ToString(item.Name), tag_row, "");
-                    InsertProduct(Convert.ToString(item.Category), tag_row);
-                    InsertProduct(Convert.ToString(item.Price.ToMoney()), tag_row);
-                    InsertProductDescription(item.Description, item.Preview.HTMLImgProduct(), tag_row);
+                    this.InsertProduct(Convert.ToString(item.ID),  tag_row);
+                    this.InsertProduct(Convert.ToString(item.Name),  tag_row, "");
+                    this.InsertProduct(Convert.ToString(item.Category),  tag_row);
+                    var td = this.InsertProduct(Convert.ToString(item.Price.ToMoney()), tag_row);
+
+                    this.InsertAddToCart(item.ID, td);
+
+                    this.InsertProductDescription(item.Description, item.Preview.HTMLImgProduct(), tag_row);
                     tag_table.InnerHtml.AppendHtml(tag_row);
                 }
 

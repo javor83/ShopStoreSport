@@ -26,6 +26,8 @@ namespace ShopStoreSport
                     }
                 );
             builder.Services.AddScoped<IStoreRepository, EFStoreRepository>();
+            builder.Services.AddDistributedMemoryCache();//za sesiq
+            builder.Services.AddSession();//za sesiq
             //--------------------------------
             var app = builder.Build();
 
@@ -43,11 +45,8 @@ namespace ShopStoreSport
             app.UseRouting();
 
             app.UseAuthorization();
-
-            app.MapControllerRoute(
-                "pagination",
-                "Products/Page{pindex}/Category{category}",
-                new { Controller = "Home", action = "Index" });
+            app.UseSession();//za sesiq
+           
 
             app.MapControllerRoute(
                 name: "default",

@@ -15,8 +15,8 @@ namespace ShopStoreSport.Models
         IEnumerable<SelectListItem> SelectTagCategoryList();
 
         Task AddProduct(InsertProductDTO key);
-       
 
+        
 
     }
 }

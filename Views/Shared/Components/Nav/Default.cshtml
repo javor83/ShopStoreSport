@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Category>
+
+    @foreach (Category k in Model)
+    {
+       
+            var class_name = "btn btn-outline-primary d-block mb-2";
+            if (ViewBag.category != null && @ViewBag.category == k.Id)
+            {
+                class_name = "btn btn-outline-primary d-block mb-2 active";
+            }
+        
+        <a asp-controller="Home"
+           class="@class_name"
+           asp-action="Index" asp-route-category="@k.Id" asp-route-pindex="1">
+            @k.Cname
+        </a>
+    
+    }
+
