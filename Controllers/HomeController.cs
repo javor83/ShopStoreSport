@@ -1,8 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ShopStoreSport.database;
 using ShopStoreSport.DTO;
 using ShopStoreSport.Models;
 using System.Diagnostics;
+using System.IO;
+
 
 namespace ShopStoreSport.Controllers
 {
@@ -41,18 +44,30 @@ namespace ShopStoreSport.Controllers
             return View(list);
         }
         //************************************************************************
-        [HttpPost,ValidateAntiForgeryToken]
-        
-        public IActionResult Add(InsertProductDTO key)
-        {
+        [HttpPost, ValidateAntiForgeryToken]
 
-            return null;
+        public async Task<IActionResult> Add(InsertProductDTO key)
+        {
+            if (ModelState.IsValid)
+            {
+                await this.rp.AddProduct(key);
+
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ViewBag.add = this.rp.SelectTagCategoryList();
+                return View(key);
+            }
         }
+        
+       
         //************************************************************************
+
         public IActionResult Add()
         {
             InsertProductDTO item = InsertProductDTO.Empty();
-            item.CategoryList = this.rp.GetCategories();
+            ViewBag.add = this.rp.SelectTagCategoryList();
             return View(item);
         }
 

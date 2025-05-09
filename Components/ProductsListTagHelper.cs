@@ -121,7 +121,7 @@ namespace ShopStoreSport.DTO
                     TagBuilder tag_row = new TagBuilder("tr");
 
                     InsertProduct(Convert.ToString(item.ID), tag_row);
-                    InsertProduct(Convert.ToString(item.Category), tag_row, "");
+                    InsertProduct(Convert.ToString(item.Name), tag_row, "");
                     InsertProduct(Convert.ToString(item.Category), tag_row);
                     InsertProduct(Convert.ToString(item.Price.ToMoney()), tag_row);
                     InsertProductDescription(item.Description, item.Preview.HTMLImgProduct(), tag_row);

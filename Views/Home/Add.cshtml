@@ -8,6 +8,7 @@
 <form method="post" asp-action="Add" asp-controller="Home" enctype="multipart/form-data" asp-antiforgery="true">
     <div asp-validation-summary="All"></div>
     <div class="form-group">
+
         <label for="@Model.Name" class="form-label">@InsertProductDTO_caption.Name</label>
         <input type="text" class="form-control" asp-for="@Model.Name" />
     </div>
@@ -17,11 +18,11 @@
     </div>
     <div class="form-group">
         <label for="@Model.Price" class="form-label">@InsertProductDTO_caption.Price</label>
-        <input type="number" class="form-control" asp-for="@Model.Price" />
+        <input type="number" class="form-control" asp-for="@Model.Price" step="0.01"/>
     </div>
     <div class="form-group">
         <label for="@Model.Category" class="form-label">@InsertProductDTO_caption.Category</label>
-        <select asp-for="@Model.Category" class="form-select" asp-items="@Model.CatList()">
+        <select asp-for="@Model.Category" class="form-select" asp-items="@ViewBag.add">
 
         </select>
     </div>

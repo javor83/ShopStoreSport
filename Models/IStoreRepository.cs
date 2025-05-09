@@ -1,4 +1,5 @@
-﻿using ShopStoreSport.database;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using ShopStoreSport.database;
 
 namespace ShopStoreSport.Models
 {
@@ -11,6 +12,10 @@ namespace ShopStoreSport.Models
         int CountProducts(int? category);
 
         IEnumerable<Category> GetCategories();
+        IEnumerable<SelectListItem> SelectTagCategoryList();
+
+        Task AddProduct(InsertProductDTO key);
+       
 
 
     }

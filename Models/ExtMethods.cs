@@ -1,4 +1,7 @@
-﻿namespace ShopStoreSport.Models
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+
+namespace ShopStoreSport.Models
 {
     public static class ExtMethods
     {
@@ -12,6 +15,10 @@
         {
             return string.Format("{0:C2}", list);
         }
+        //*************************************************************************
+
+        
+
         //*************************************************************************
         public static string HTMLImgProduct(this string? key)
         {
