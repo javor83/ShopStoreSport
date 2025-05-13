@@ -5,6 +5,14 @@ namespace ShopStoreSport.Models
     public static class ExtMethods
     {
 
+        public static void RemoveSession(this ISession session)
+        {
+            string? json = session.GetString("cart");
+            if (string.IsNullOrEmpty(json) == false)
+            {
+                session.Remove("cart");
+            }
+        }
         //*************************************************************************
         public static void SetJson
             (
@@ -18,6 +26,8 @@ namespace ShopStoreSport.Models
 
             string x = JsonSerializer.Serialize<ListCartLine>(value);
 
+
+            
 
 
             session.SetString("cart",x);

@@ -18,6 +18,10 @@ namespace ShopStoreSport.Controllers
         //************************************************************************
         public IActionResult Index(int? category,int pindex = 1)
         {
+            
+           
+           
+            
             int total_elements = this.rp.CountProducts(category);
             var filtered = this.rp.GetProductsDTO(pindex, category, consts.ProductPageSize);
             ProductsListViewModel list = new ProductsListViewModel()

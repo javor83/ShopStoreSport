@@ -41,11 +41,11 @@ namespace ShopStoreSport
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();//za sesiq
             app.UseRouting();
 
             app.UseAuthorization();
-            app.UseSession();//za sesiq
+           
            
 
             app.MapControllerRoute(

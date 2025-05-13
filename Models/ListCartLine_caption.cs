@@ -9,5 +9,9 @@
         public const string Delete = "Изтрий";
         public const string Update = "Промяна";
         public const string Sum = "Сума : ";
+        public const string ClearCart = "Изпразни количката";
+        public const string FinishCart = "Приключи поръчката";
+        public const string CanceledCard = "Отказана поръчка";
+        public const string FinishedCart = "Приключена поръчка";
     }
 }

@@ -1,32 +1,48 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+
 @model ListCartLine
 <h2 class="d-block text-center">@ListCartLine_caption.Title</h2>
 <h4 class="d-block text-center">@ListCartLine_caption.Sum @Model.Total().ToMoney()</h4>
+@if (Model.Count() > 0)
+{
+    <div class="mt-3 text-center mb-2">
+        <form method="post" asp-action="Clear" asp-controller="ShopCart" asp-antiforgery="true">
+            <input type="submit" class="btn btn-danger" name="clear" value="@ListCartLine_caption.ClearCart"/>
+            <input type="submit" class="btn btn-outline-primary" name="checkout" value="@ListCartLine_caption.FinishCart" />
+        </form>
+    </div>   
+}
 <table class="table table-striped table-hover">
     <tr>
         <th>@ListCartLine_caption.Name</th>
         <th>@ListCartLine_caption.Price</th>
         <th>@ListCartLine_caption.Qty</th>
     </tr>
-    @for (int i = 0;i<Model.Count();i++)
+    @for (int i=0;i< Model.Count();i++)
     {
         <tr>
-            <td>@Model.ElementAt(i).Name</td>
-            <td>@Model.ElementAt(i).Price.ToMoney()</td>
+            <td>@Model[i].Name</td>
+            <td>@Model[i].Price.ToMoney()</td>
             <td>
-                <form method="post" asp-controller="ShopCart" asp-action="Update" asp-antiforgery="true">
-                    <input type="text" asp-for="@Model.ElementAt(i).Qty" />
-                    <input type="submit"
-                        class="btn btn-danger"
-                        value="@ListCartLine_caption.Delete" name="delete_item"/>
-                    <input type="submit"
-                           class="btn btn-primary"
-                           value="@ListCartLine_caption.Update" name="update_item" />
+               
+                <form method="post"
+                    asp-controller="ShopCart" 
+                    asp-action="Update" 
+                    asp-antiforgery="true">
+                    <input type="hidden" asp-for="@Model[@i].ID" name="product_id" />
+                    <div class="input-group mb-3">
+                        <input class="btn btn-primary"
+                               name="update_item" type="submit" value="@ListCartLine_caption.Update"/>
+                        <input type="text" asp-for="@Model[@i].Qty" class="form-control text-center" name="product_qty" placeholder="quantity">
+                        <input class="btn btn-danger" name="delete_item" type="submit" value="@ListCartLine_caption.Delete" />
+
+                    </div>
                 </form>
             </td>
         </tr>   
     }
 </table>
+
 

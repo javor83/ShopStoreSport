@@ -4,26 +4,29 @@ using System.Collections;
 
 namespace ShopStoreSport.Models
 {
-    public class ListCartLine 
+    public class ListCartLine
     {
-        private List<CartLine> _cartLines = null;
+        public List<CartLineDTO> _cartLines { get; set; } = new List<CartLineDTO>();
         //*****************************************************************
         public decimal Total()
         {
-            return _cartLines.Sum(x => x.Qty * x.Price);
+            return _cartLines.Sum(x => (x.Qty ?? 0) * x.Price);
         }
-
+        //*****************************************************************
         public ListCartLine()
         {
-            _cartLines = new List<CartLine>();
+           
         }
+
+       
+
 
         //*****************************************************************
         public void Update(int pid , int qty)
         {
             int pos = this._cartLines.FindIndex
               (
-                  delegate (CartLine item)
+                  delegate (CartLineDTO item)
                   {
                       return item.ID == pid;
 
@@ -48,7 +51,7 @@ namespace ShopStoreSport.Models
         {
             int pos = this._cartLines.FindIndex
                (
-                   delegate (CartLine item)
+                   delegate (CartLineDTO item)
                    {
                        return item.ID == pid.Id;
 
@@ -58,12 +61,12 @@ namespace ShopStoreSport.Models
             {
                 this._cartLines.Add
                     (
-                    new CartLine()
+                    new CartLineDTO()
                     {
                         ID = pid.Id,
-                        Name = pid.Name,
+                        Qty = 1,
                         Price = pid.Price,
-                        Qty = 1
+                        Name = pid.Name
                     }
                     );
             }
@@ -80,7 +83,7 @@ namespace ShopStoreSport.Models
         {
             int pos = this._cartLines.FindIndex
                (
-                   delegate (CartLine item)
+                   delegate (CartLineDTO item)
                    {
                        return item.ID == pid;
 
@@ -96,18 +99,22 @@ namespace ShopStoreSport.Models
             return this._cartLines.Count();
         }
         //*****************************************************************
-        public CartLine ElementAt(int key)
+        public CartLineDTO this[int key]
         {
-            return this._cartLines.ElementAt(key);
+            get
+            {
+                return this._cartLines[key];
+            }
+                 
         }
-
 
         //*****************************************************************
         public void Clear()
         {
             this._cartLines.Clear();
         }
-       
+        
+
         //*****************************************************************
     }
 }
