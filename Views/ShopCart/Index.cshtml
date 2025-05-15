@@ -23,19 +23,19 @@
     @for (int i=0;i< Model.Count();i++)
     {
         <tr>
-            <td>@Model[i].Name</td>
-            <td>@Model[i].Price.ToMoney()</td>
+            <td>@Model.ElementAt(@i).Name</td>
+            <td>@Model.ElementAt(@i).Price.ToMoney()</td>
             <td>
                
                 <form method="post"
                     asp-controller="ShopCart" 
                     asp-action="Update" 
                     asp-antiforgery="true">
-                    <input type="hidden" asp-for="@Model[@i].ID" name="product_id" />
+                    <input type="hidden" asp-for="@Model.ElementAt(@i).ID" name="product_id" />
                     <div class="input-group mb-3">
                         <input class="btn btn-primary"
                                name="update_item" type="submit" value="@ListCartLine_caption.Update"/>
-                        <input type="text" asp-for="@Model[@i].Qty" class="form-control text-center" name="product_qty" placeholder="quantity">
+                        <input type="text" asp-for="@Model.ElementAt(@i).Qty" class="form-control text-center" name="product_qty" placeholder="quantity">
                         <input class="btn btn-danger" name="delete_item" type="submit" value="@ListCartLine_caption.Delete" />
 
                     </div>

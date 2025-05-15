@@ -1,11 +1,14 @@
 ﻿
 using ShopStoreSport.database;
-using System.Collections;
 
 namespace ShopStoreSport.Models
 {
-    public class ListCartLine
+    
+
+    public class ListCartLine: ICart
     {
+        
+        
         public List<CartLineDTO> _cartLines { get; set; } = new List<CartLineDTO>();
         //*****************************************************************
         public decimal Total()
@@ -15,7 +18,9 @@ namespace ShopStoreSport.Models
         //*****************************************************************
         public ListCartLine()
         {
-           
+            
+
+            
         }
 
        
@@ -43,11 +48,12 @@ namespace ShopStoreSport.Models
                     this._cartLines[pos].Qty = qty;
                 }
             }
+           
         }
         //*****************************************************************
 
 
-        public void Add(Product pid)
+        public  void Add(Product pid)
         {
             int pos = this._cartLines.FindIndex
                (
@@ -77,6 +83,7 @@ namespace ShopStoreSport.Models
                 this._cartLines[pos].Qty += 1;
 
             }
+            
         }
         //*****************************************************************
         public void Remove(int pid)
@@ -92,6 +99,7 @@ namespace ShopStoreSport.Models
             if (pos > -1) {
                 this._cartLines.RemoveAt(pos);
             }
+            
         }
         //*****************************************************************
         public int Count()
@@ -99,14 +107,11 @@ namespace ShopStoreSport.Models
             return this._cartLines.Count();
         }
         //*****************************************************************
-        public CartLineDTO this[int key]
+        public CartLineDTO ElementAt(int key)
         {
-            get
-            {
-                return this._cartLines[key];
-            }
-                 
+            return this._cartLines[key];
         }
+
 
         //*****************************************************************
         public void Clear()
